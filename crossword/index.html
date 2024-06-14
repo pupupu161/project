@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>БАС-ВОРД</title>
+	<!-- <link rel="stylesheet" href="/reset.css"> -->
+	<!-- <link rel="stylesheet" href="/fonts.css"> -->
+	<link rel="stylesheet" href="/style.css">
+	<script>
+		//Globals
+		var currentTextInput;
+		var puzzelArrayData;
+		//Loads the Crossword
+		function initializeScreen() {
+			var puzzelTable = document.getElementById("puzzel");
+			puzzelArrayData = preparePuzzelArray();
+			for (var i = 0; i < puzzelArrayData.length; i++) {
+				var row = puzzelTable.insertRow(-1);
+				var rowData = puzzelArrayData[i];
+				for (var j = 0; j < rowData.length; j++) {
+					var cell = row.insertCell(-1);
+					if (rowData[j] != 0) {
+						var txtID = String('txt' + '_' + i + '_' + j);
+						cell.innerHTML = '<input type="text" class="inputBox" maxlength="1" style="text-transform: lowercase" ' + 'id="' + txtID + '" onfocus="textInputFocus(' + "'" + txtID + "'" + ')">';
+					} else {
+						cell.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+					}
+				}
+			}
+			addHint();
+		}
+		//Adds the hint numbers
+		function addHint() {
+			document.getElementById("txt_1_6").placeholder = "1";
+			document.getElementById("txt_6_3").placeholder = "2";
+			document.getElementById("txt_4_10").placeholder = "3";
+			document.getElementById("txt_10_9").placeholder = "4";
+			document.getElementById("txt_3_3").placeholder = "5";
+			document.getElementById("txt_6_6").placeholder = "6";
+			document.getElementById("txt_4_1").placeholder = "7";
+			document.getElementById("txt_2_14").placeholder = "8   9";
+			document.getElementById("txt_0_17").placeholder = "10";
+			document.getElementById("txt_7_13").placeholder = "11";
+			document.getElementById("txt_3_17").placeholder = "12";
+			document.getElementById("txt_10_11").placeholder = "13";
+			document.getElementById("txt_10_0").placeholder = "14";
+			document.getElementById("txt_6_0").placeholder = "15";
+			document.getElementById("txt_13_7").placeholder = "16";
+			document.getElementById("txt_13_21").placeholder = "17";
+			document.getElementById("txt_0_22").placeholder = "18";
+			document.getElementById("txt_17_11").placeholder = "19";
+			document.getElementById("txt_0_11").placeholder = "20";
+		}
+		//Stores ID of the selected cell into currentTextInput
+		function textInputFocus(txtID123) {
+			currentTextInput = txtID123;
+		}
+		//Returns Array
+		function preparePuzzelArray() {
+			var items = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'п', 'а', 'р', 'а', 'ш', 'ю', 'т', 0, 0, 0, 0, 'а', 0, 0],
+			[0, 0, 0, 0, 0, 0, 'д', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'а', 0, 0, 0, 0, 'в', 0, 0],
+			[0, 0, 0, 0, 0, 0, 'р', 0, 0, 0, 0, 0, 0, 0, 'к', 'р', 'е', 'н', 0, 0, 0, 0, 'и', 0, 0],
+			[0, 0, 0, 'ц', 0, 0, 'о', 0, 0, 0, 0, 0, 0, 0, 'а', 0, 0, 'г', 'л', 'и', 'с', 'с', 'а', 'д', 'а'],
+			[0, 'э', 'л', 'е', 'в', 'о', 'н', 'ы', 0, 0, 'ф', 0, 0, 0, 'т', 0, 0, 'а', 0, 0, 0, 0, 'г', 0, 0],
+			[0, 0, 0, 'н', 0, 0, 0, 0, 0, 0, 'ю', 0, 0, 0, 'а', 0, 0, 'ж', 0, 0, 0, 0, 'о', 0, 0],
+			['а', 0, 0, 'т', 'е', 'п', 'л', 'о', 'в', 'и', 'з', 'о', 'р', 0, 'п', 0, 0, 0, 0, 0, 0, 0, 'р', 0, 0],
+			['к', 0, 0, 'р', 0, 0, 'о', 0, 0, 0, 'е', 0, 0, 'п', 'у', 'т', 'е', 'в', 'а', 'я', 0, 0, 'и', 0, 0],
+			['к', 0, 0, 'о', 0, 0, 'п', 0, 0, 0, 'л', 0, 0, 0, 'л', 0, 0, 0, 0, 0, 0, 0, 'з', 0, 0],
+			['у', 0, 0, 'в', 0, 0, 'о', 0, 0, 0, 'я', 0, 0, 0, 'ь', 0, 0, 0, 0, 0, 0, 0, 'о', 0, 0],
+			['м', 'а', 'я', 'к', 0, 0, 'с', 0, 0, 'д', 'ж', 'о', 'й', 'с', 'т', 'и', 'к', 0, 0, 0, 0, 0, 'н', 0, 0],
+			['у', 0, 0, 'а', 0, 0, 'т', 0, 0, 0, 0, 'п', 0, 0, 'а', 0, 0, 0, 0, 0, 0, 0, 'т', 0, 0],
+			['л', 0, 0, 0, 0, 0, 'и', 0, 0, 0, 0, 'е', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			['я', 0, 0, 0, 0, 0, 0, 'к', 'в', 'а', 'д', 'р', 'о', 'к', 'о', 'п', 'т', 'е', 'р', 0, 0, 'ш', 0, 0, 0],
+			['т', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'а', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'а', 0, 0, 0],
+			['о', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'т', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'с', 0, 0, 0],
+			['р', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'о', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'с', 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'р', 'а', 'д', 'и', 'о', 'с', 'т', 'а', 'н', 'ц', 'и', 'я', 0, 0]
+			];
+			return items;
+		}
+		//Clear All Button
+		function clearAllClicked() {
+			currentTextInput = '';
+			var puzzelTable = document.getElementById("puzzel");
+			puzzelTable.innerHTML = '';
+			initializeScreen();
+		}
+		//Check button
+		function checkClicked() {
+			for (var i = 0; i < puzzelArrayData.length; i++) {
+				var rowData = puzzelArrayData[i];
+				for (var j = 0; j < rowData.length; j++) {
+					if (rowData[j] != 0) {
+						var selectedInputTextElement = document.getElementById('txt' + '_' + i + '_' + j);
+						if (selectedInputTextElement.value != puzzelArrayData[i][j]) {
+							selectedInputTextElement.style.backgroundColor = 'rgba(201, 25, 25, 0.763)';
+
+						} else {
+							selectedInputTextElement.style.backgroundColor = 'rgba(58, 211, 73, 0.763)';
+						}
+					}
+				}
+			}
+		}
+		//Clue Button
+		function clueClicked() {
+			if (currentTextInput != null) {
+				var temp1 = currentTextInput;
+				var token = temp1.split("_");
+				var row = token[1];
+				var column = token[2];
+				document.getElementById(temp1).value = puzzelArrayData[row][column];
+				//checkClicked();
+			}
+		}
+		//Solve Button
+		function solveClicked() {
+			if (currentTextInput != null) {
+				var temp1 = currentTextInput;
+				var token = temp1.split("_");
+				var row = token[1];
+				var column = token[2];
+
+				// Print elements on top
+				for (j = row; j >= 0; j--) {
+					if (puzzelArrayData[j][column] != 0) {
+						document.getElementById('txt' + '_' + j + '_' + column).value = puzzelArrayData[j][column];
+					} else break;
+				}
+				// Print elements on right
+				for (i = column; i < puzzelArrayData[row].length; i++) {
+					if (puzzelArrayData[row][i] != 0) {
+						document.getElementById('txt' + '_' + row + '_' + i).value = puzzelArrayData[row][i];
+					} else break;
+				}
+
+				// Print elements below
+				for (m = row; m < puzzelArrayData.length; m++) {
+					if (puzzelArrayData[m][column] != 0) {
+						document.getElementById('txt' + '_' + m + '_' + column).value = puzzelArrayData[m][column];
+					} else break;
+				}
+				// Print elements on left
+				for (k = column; k >= 0; k--) {
+					if (puzzelArrayData[row][k] != 0) {
+						document.getElementById('txt' + '_' + row + '_' + k).value = puzzelArrayData[row][k];
+					} else break;
+				}
+			}
+		}
+	</script>
+</head>
+
+<body onload="initializeScreen()">
+	<div class="header"><h1 class="title">БАС-ВОРД</h1></div>
+	<div class="container">
+		<div id="leftBox">
+			<table id="puzzel"></table>
+		</div>
+		<div id="rightBox">
+			<table>
+				<tr>
+					<td><input class="butt" type="submit" value="Очистить все поля" onclick="clearAllClicked()"></td>
+					<td><input class="butt" type="submit" value="Проверить все ответы" onclick="checkClicked()"></td>
+					<td><input class="butt" type="submit" value="Открыть слово целиком" onclick="solveClicked()"></td>
+					<td><input class="butt" type="submit" value="Открыть букву" onclick="clueClicked()"></td>
+				</tr>
+			</table>
+			<div id="hintsTable">
+				<div class="horizontal hintsList ">
+					<h2 class="listTitle">По горизонтали</h2>
+					<ul >
+						<li>2. Устройство для наблюдения за распределением температуры исследуемой поверхности.</li>
+						<li>4. В состав НСУ входит ноутбук в защищённом исполнении, антенная система, коммутирующий блок, кабель питания и … </li>
+						<li>7. Ародинамические органы управления бвс, гибрид элеронов и рулей высоты.</li>
+						<li>9. Поворот вокруг продольной оси, при котором бвс поднимает одну и опускает другую консоль крыла.</li>
+						<li>11. Как называется скорость перемещения БВС относительно земной поверхности</li>
+						<li>12. Траектория полёта летательного аппарата, по которой он снижается, в том числе — непосредственно перед посадкой. </li>
+						<li>14. Переносное устройство позиционирования для наземных групп со встроенным модемом и приемником СНС. </li>
+						<li>16. Тип мультикоптера с четырьмя несущими винтами. </li>
+						<li>19. Комплекс устройств для передачи информации посредством радиоволн и (или) её приёма. </li>
+						<li>20. Для посадки БВС самолетного типа чаще всего используют используют.</li>
+					</ul>
+				</div>
+				<div class="verical hintsList">
+					<h2 class="listTitle">По вертикали</h2>
+					<ul >
+						<li>1. Воздушное судно без экипажа на его борту.</li>
+						<li>3. Корпус летательного аппарата.</li>
+						<li>5. Расстояние центра масс от средней аэродинамической хорды, выраженное в процентах этой самой хорды. </li>
+						<li>6. Основная рабочая часть винта, создающая тягу при его вращении. </li>
+						<li>8. Устройство для запуска БПЛА самолетного типа.</li>
+						<li>10. Поворот вокруг поперечной оси, при котором ЛА опускает и поднимает нос.</li>
+						<li>13. Человек, отвечающий за наземное управление беспилотником.</li>
+						<li>15. Устройство, которое запасает электрическую энергию и является одним из типов химических источников тока. </li>
+						<li>17. Система опор летательного аппарата (ЛА), обеспечивающая его стоянку. </li>
+						<li>18. Бортовой гироскопический прибор, используемый в авиации для определения и индикации продольного и поперечного углов наклона летательного аппарата (тангажа и крена), то есть углов ориентации относительно истинной вертикали.</li>
+					</ul>
+				</div>				
+			</div>
+		</div>
+	</div>
+</body>
+</html>
